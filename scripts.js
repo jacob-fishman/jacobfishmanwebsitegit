@@ -80,7 +80,7 @@ class Streak {
     }
     // Set speed for a subtle diagonal movement (left and down)
     // Set speed for diagonal movement with a constant slope
-    const factor = 4 + Math.random() * 1.5;
+    const factor = 2 + (Math.random() * 4);
     const slope = 0.5; // constant ratio of vertical to horizontal speed
     this.speedX = -factor;
     this.speedY = factor * slope;
