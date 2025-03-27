@@ -221,8 +221,13 @@ h1 {
 
   /* Adjust the Department of CS logo */
   #university-of-maryland-logo {
-    height: 80px;
-    width: auto;
+    height: auto;
+    width: 80%;
+  }
+
+  #typed-header{
+    font-size: 3em;
+    min-height: 150px;
   }
 }
 
