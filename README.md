@@ -1,2 +1,2 @@
 # jacobfishmanwebsite
-jacobfishman.com
+jacob-fishman.com
