@@ -1,45 +1,118 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jacob Fishman</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script src="./sample.pdf"></script>
 </head>
 <body>
-    <div id="particles-js"></div>
-    <canvas id="overlay-canvas"></canvas>
+    <canvas id="rocketCanvas"></canvas>
+    <div class="wrapper">
+        <div class="header">
+
+
+     <div class="header-element"> <h1>Jacob Fishman</h1></div>
+    <div class="header-element">
+        <img src="deptcswhitetext.png" alt="Terp1" id="university-of-maryland-logo" height="120">
+        </div>
+
+     <div class="header-element">
+            <img class="header-image" src="jacobfishmanheadshot.jpg" alt="About Me">
+        </div>
+</div>
+
+    <div class="cards-box">
     <div class="container">
-        <div class="card" onclick="location.href='about.html'">
-            <img src="jacobfishmanheadshot.jpg" alt="About Me">
+        <div class="card" onclick="smoothScroll(document.getElementById('about'))">
+            <img src="summary.png" alt="About Me">
             <div class="card-content">
-                <h2>About Me</h2>
-                <p>I'm a senior computer science student at the University of Maryland...</p>
+                <h2>Summary</h2>
             </div>
         </div>
-        <div class="card" onclick="location.href='experience.html'">
+        <div class="card" onclick="smoothScroll(document.getElementById('experience'))">
             <img src="working-at-computer-cropped.jpg" alt="Experience">
             <div class="card-content">
                 <h2>Experience</h2>
-                <p>I've gained mmmmmm diverse professional experience...</p>
             </div>
         </div>
-        <div class="card" onclick="location.href='projects.html'">
+        <div class="card" onclick="smoothScroll(document.getElementById('skills'))">
             <img src="laptop-with-code.jpg" alt="Projects" id="laptop-with-code-img">
             <div class="card-content">
-                <h2>Projects</h2>
-                <p>In and out of school, I have worked on a variety of projects...</p>
+                <h2>Skills</h2>
             </div>
         </div>
-        <div class="card" onclick="location.href='skills.html'">
-            <img src="brain-skills.jpg" alt="Skills">
+        <div class="card" onclick="smoothScroll(document.getElementById('resume'))">
+            <img src="cv.png" alt="Resume">
             <div class="card-content">
-                <h2>Skills</h2>
-                <p>Through my experiences, I have developed a strong skill set...</p>
+                <h2>Resume</h2>
             </div>
         </div>
     </div>
+</div>
+    <div id="about" class="main-content">
+    <h2 class="content-header">Summary</h2>
+    <h4 class="content-subheader">Driven Engineer With Strong Communication Skills</h4>
+     <p class="content-body">My strong communication skills and focus on deadlines have set me apart during my internship and schooling.</p>
+    </div>
+
+    <div id="experience" class="main-content">
+    <h2 class="content-header">Experience</h2>
+    <p class="content-subheader">Most Impactful Projects I've Completed:</p>
+      <table class="body-table">
+        <tbody>
+            <tr>
+                <td>Project 1</td>
+                <td>Description of Project 1</td>
+            </tr>
+            <tr>
+                <td>Project 2</td>
+                <td>Description of Project 2</td>
+            </tr>
+            <tr>
+                <td>Project N</td>
+                <td>Description of Project N</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <div id="skills" class="main-content">
+    <h2 class="content-header">Skills</h2>
+    <p class="content-subheader">I Plan To Use and Develop These Skills:</p>
+           <table class="body-table">
+            <tbody>
+                <tr>
+                    <td>Skill 1</td>
+                    <td>Description of Experience with Skill 1</td>
+                </tr>
+                <tr>
+                    <td>Skill 2</td>
+                    <td>Description of Experience With Skill 2</td>
+                </tr>
+                <tr>
+                    <td>Skill N</td>
+                    <td>Description of Skill N</td>
+                </tr>
+            </tbody>
+    </table>
+    </div>
+
+    <div id="resume" class="main-content">
+    <h2 class="content-header">Resume</h2>
+    <p class="content-subheader">View or Download My Resume</p>
+    <div id="resume-warning">
+        <p>Open website on a larger screen to view resume!</p></div>
+    <div id="resume-holder">
+    <object class="resume-object" data="Jacob Fishman Career Fair Resume.pdf"
+        type="application/pdf" width="1000" height="700">
+    </object>
+</div>
+     <a class="content-body linkout" href="/Jacob Fishman Career Fair Resume.pdf" download="JacobFishmanResume">Download it!</a>
+    </div>
+
+</div>
     <script src="scripts.js"></script>
 </body>
 </html>

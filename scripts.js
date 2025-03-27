@@ -1,94 +1,129 @@
-// Initialize particles.js
-particlesJS("particles-js", {
-  particles: {
-    number: { value: 170, density: { enable: true, value_area: 800 } },
-    color: { value: "#ffffff" },
-    shape: { type: "circle" },
-    opacity: { value: 1, random: false },
-    size: { value: 3, random: true },
-    line_linked: { enable: true, distance: 100, color: "#ffffff", opacity: .5, width: 1 },
-    move: {
-      enable: true,
-      speed: 2,
-      direction: "none",
-      random: false,
-      straight: false,
-      out_mode: "out"
-    }
-  },
-  interactivity: {
-    detect_on: "canvas",
-    events: {
-      onhover: { enable: true, mode: "grab" },
-      onclick: { enable: true, mode: "push" },
-      resize: true
-    },
-    modes: {
-      grab: { distance: 70, line_linked: { opacity: 1 } },
-      push: { particles_nb: 4 }
-    }
-  },
-  retina_detect: true
-});
+window.smoothScroll = function(target) {
+  var scrollContainer = target;
+  do { //find scroll container
+      scrollContainer = scrollContainer.parentNode;
+      if (!scrollContainer) return;
+      scrollContainer.scrollTop += 1;
+  } while (scrollContainer.scrollTop == 0);
 
-// Get overlay canvas and its context
-const overlayCanvas = document.getElementById('overlay-canvas');
-const overlayCtx = overlayCanvas.getContext('2d');
+  var targetY = 0;
+  do { //find the top of target relatively to the container
+      if (target == scrollContainer) break;
+      targetY += target.offsetTop;
+  } while (target = target.offsetParent);
 
-// Resize the overlay canvas to match the window size
-function resizeOverlayCanvas() {
-  overlayCanvas.width = window.innerWidth;
-  overlayCanvas.height = window.innerHeight;
-}
-resizeOverlayCanvas();
-window.addEventListener('resize', resizeOverlayCanvas);
-
-// Store the current mouse position
-let mouse = { x: null, y: null };
-document.addEventListener('mousemove', (e) => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-
-// Animation loop to draw lines between the cursor and particles within a defined radius
-function drawLines() {
-  // Clear the overlay canvas each frame
-  overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
-
-  // Ensure mouse position is defined and particles are loaded
-  if (mouse.x !== null && mouse.y !== null && window.pJSDom && window.pJSDom[0] &&
-      window.pJSDom[0].pJS && window.pJSDom[0].pJS.particles.array) {
-    
-    const particlesArray = window.pJSDom[0].pJS.particles.array;
-    const radius = 150; // Adjust this value as desired
-    
-    overlayCtx.strokeStyle = "rgba(255, 255, 255, .7)";
-    overlayCtx.lineWidth = 1;
-
-    const scale = window.devicePixelRatio || 1;
-    particlesArray.forEach(particle => {
-      // Scale particle coordinates
-      const particleX = particle.x / scale;
-      const particleY = particle.y / scale;
-
-      // Only consider particles that are fully visible on the overlay canvas
-      if (!(particleX >= 0 && particleX <= overlayCanvas.width && particleY >= 0 && particleY <= overlayCanvas.height)) {
-        return;
-      }
-      
-      const dx = particleX - mouse.x;
-      const dy = particleY - mouse.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance <= radius) {
-        overlayCtx.beginPath();
-        overlayCtx.moveTo(mouse.x, mouse.y);
-        overlayCtx.lineTo(particleX, particleY);
-        overlayCtx.stroke();
-      }
-    });
+  scroll = function(c, a, b, i) {
+      i++; if (i > 30) return;
+      c.scrollTop = a + (b - a) / 30 * i;
+      setTimeout(function(){ scroll(c, a, b, i); }, 20);
   }
-  
-  // Continue the animation loop
-  requestAnimationFrame(drawLines);
+  // start scrolling
+  scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
 }
-drawLines();
+const canvas = document.getElementById('rocketCanvas');
+const ctx = canvas.getContext('2d');
+
+// Ensure the canvas matches the window size
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+// Color palette for the streaks (add or remove colors as you like)
+const colors = [
+  '#ff0000', // red
+  '#ff9800', // orange
+  '#ffff00', // yellow
+  '#00ff00', // green
+  '#00ffff', // cyan
+  '#0000ff', // blue
+  '#ff00ff'  // magenta
+];
+
+// Number of streaks
+const STREAK_COUNT = 40;
+
+// Each streak has position, velocity, color, etc.
+class Streak {
+  constructor() {
+    this.reset();
+  }
+
+  reset() {
+    // Start near top-right
+    // x is near the right edge, y is near the top
+    // We add some randomization so they don't all spawn in the exact corner
+    this.x = canvas.width + Math.random() * 100;
+    this.y = -Math.random() * 100;
+
+    // Speed from top-right to bottom-left (negative X, positive Y)
+    // Adjust the ranges to make them faster or slower
+    this.speedX = -(2 + Math.random() * 2);  // e.g. between -2 and -4
+    this.speedY = 2 + Math.random() * 2;     // e.g. between 2 and 4
+
+    // Choose a random color
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+
+    // Length of the streak (visual line length)
+    this.length = 10 + Math.random() * 10;
+
+    // Thickness of the streak
+    this.thickness = 2 + Math.random() * 2;
+  }
+
+  update() {
+    // Move the streak
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    // If it has moved beyond bottom-left, reset it
+    if (this.x < -200 || this.y > canvas.height + 200) {
+      this.reset();
+    }
+  }
+
+  draw() {
+    ctx.save();
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = this.thickness;
+    ctx.beginPath();
+
+    // Draw a line from the current position 
+    // to a point behind it (in the opposite direction of movement)
+    // so it looks like a streak
+    const vx = -this.speedX; // reversed velocity in x
+    const vy = -this.speedY; // reversed velocity in y
+
+    // “Tip” of streak is the current x,y
+    // “Tail” is the tip minus velocity scaled by the length
+    ctx.moveTo(this.x, this.y);
+    ctx.lineTo(this.x + vx * this.length, this.y + vy * this.length);
+    ctx.stroke();
+    ctx.restore();
+  }
+}
+
+// Create an array of streaks
+const streaks = [];
+for (let i = 0; i < STREAK_COUNT; i++) {
+  streaks.push(new Streak());
+}
+
+// Animation loop
+function animate() {
+  // Clear the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Update and draw each streak
+  for (const streak of streaks) {
+    streak.update();
+    streak.draw();
+  }
+
+  requestAnimationFrame(animate);
+}
+
+// Start the animation
+animate();

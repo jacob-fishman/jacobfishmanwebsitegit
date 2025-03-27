@@ -8,7 +8,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: black;
     color: white;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 #particles-js {
@@ -31,16 +31,45 @@ body {
     pointer-events: none;    
 }
 
+.header {
+    position: relative;
+    z-index: 3;
+    display: block; 
+    justify-content: center;
+    align-items: center;
+    /*height: 30vh;*/
+    width: 100vw;
+    gap: 20px;
+    padding-top: 5vh;
+}
+
+.header-element {
+    padding-top: 3vh;
+     display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+
+.cards-box {
+ position: relative;
+ display: block;
+ padding-top: 10vh;
+}
 /* Main Container */
 .container {
     position: relative;
     z-index: 3;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /*height: 100vh;
+    top: 50vh;*/
     gap: 20px;
 }
+
+
 
 /* Card Design */
 .card {
@@ -77,6 +106,7 @@ body {
 .card-content h2,
 .card-content p {
     margin: 0;
+    padding-top: 30px;
 }
 
 #laptop-with-code-img {
@@ -85,3 +115,136 @@ body {
     object-fit: contain; /* Ensures the full image fits */
     object-position: center; /* Centers the image */
 }
+h1 {
+  font-family: Arial, sans-serif;
+  font-size: 6em;
+  text-align: center;
+}
+.modified-h2 {
+  color: red;
+}
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+    background-image:    url(inside-building.avif);
+        /*overflow-y: hidden ! important;*/
+        overflow-x: hidden ! important;
+        background-color: #f8f8f8;
+        /*background-size: cover;*/
+        /*background-size: contain;*/
+        background-repeat: no-repeat;
+        background-position: center;
+    padding-bottom: 20vh;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 20%);
+    background-clip: text;
+    z-index: 0;
+}
+.main-content {
+ position: relative;
+ /* color: red;*/
+  /*top: 30vh;*/
+  z-index: 5;
+  align-items: center;
+  width: 60%;
+  background-color: rgba(0,0,0,0.6);
+  left: 20%;
+  /*margin-top: 10vh;*/
+  padding-bottom: 2vh;
+
+}
+.content-header {
+display:block;
+width: 100%;
+text-align:center;
+margin: auto;
+margin-top:10vh;
+padding-top: 2vh;
+}
+.content-subheader {
+display:block;
+width: 100%;
+text-align:center;
+margin: auto;
+color: white;
+padding-top: 1vh;
+}
+.content-body {
+display:block;
+width: 100%;
+text-align:center;
+margin: auto;
+padding-top: 3vh;
+
+}
+.background-image { 
+position: absolute;
+ }
+ .header-image { 
+    margin-top: 10vh;
+border-radius: 150px;
+  }
+
+#resume-holder{
+    min-height: 700px;
+    padding-top: 3vh;
+    margin: auto; 
+    width: 100%; 
+}
+
+#resume-warning{
+    text-align: center;
+    display: none;
+    color: red;
+    padding-top: 2vh;
+}
+
+@media (min-width: 1400px) {
+.main-content {
+
+  width: 40%;
+  left: 30%;
+}
+}
+
+
+@media (max-width: 900px) {
+#resume-holder{
+    display: none;
+}
+#resume-warning{
+    display: block;
+}
+
+.main-content {
+width: 80%;
+left: 10%;
+}
+
+}
+
+.linkout{
+    color:white;
+}
+.body-table{
+    padding-top: 3vh;
+    width: 100%;
+    margin: auto;
+}
+tr, td {
+    width: 30vw;
+    text-align: center;
+}
+
+
+.resume-object{
+    width: 100%; 
+}
+
+#rocketCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
