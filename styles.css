@@ -116,6 +116,9 @@ h1 {
   font-size: 6em;
   text-align: center;
 }
+h2{
+    font-size: 2.5em; 
+}
 .modified-h2 {
   color: red;
 }
@@ -142,7 +145,8 @@ h1 {
   z-index: 5;
   align-items: center;
   width: 60%;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, .7);
+  border-radius: 30px;
   left: 20%;
   /*margin-top: 10vh;*/
   padding-bottom: 2vh;
