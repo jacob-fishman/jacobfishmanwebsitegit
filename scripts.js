@@ -207,33 +207,33 @@ document.addEventListener('DOMContentLoaded', function() {
   typeCharacter();
 });
 
-// Animate typing for additional content headers when they come into view
-document.addEventListener('DOMContentLoaded', function() {
-  const contentHeaders = document.querySelectorAll('.content-header');
+// // Animate typing for additional content headers when they come into view
+// document.addEventListener('DOMContentLoaded', function() {
+//   const contentHeaders = document.querySelectorAll('.content-header');
   
-  const headerObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Only animate if not already typed
-        if (!entry.target.dataset.typed) {
-          const fullText = entry.target.textContent;
-          entry.target.textContent = "";
-          let index = 0;
-          function typeCharacter() {
-            if (index < fullText.length) {
-              entry.target.textContent += fullText.charAt(index);
-              index++;
-              setTimeout(typeCharacter, 100); // adjust typing speed if needed
-            } else {
-              entry.target.dataset.typed = "true";
-              observer.unobserve(entry.target);
-            }
-          }
-          typeCharacter();
-        }
-      }
-    });
-  }, { threshold: 0.5 });
+//   const headerObserver = new IntersectionObserver((entries, observer) => {
+//     entries.forEach(entry => {
+//       if (entry.isIntersecting) {
+//         // Only animate if not already typed
+//         if (!entry.target.dataset.typed) {
+//           const fullText = entry.target.textContent;
+//           entry.target.textContent = "";
+//           let index = 0;
+//           function typeCharacter() {
+//             if (index < fullText.length) {
+//               entry.target.textContent += fullText.charAt(index);
+//               index++;
+//               setTimeout(typeCharacter, 100); // adjust typing speed if needed
+//             } else {
+//               entry.target.dataset.typed = "true";
+//               observer.unobserve(entry.target);
+//             }
+//           }
+//           typeCharacter();
+//         }
+//       }
+//     });
+//   }, { threshold: 0.5 });
   
-  contentHeaders.forEach(header => headerObserver.observe(header));
-});
+//   contentHeaders.forEach(header => headerObserver.observe(header));
+// });
