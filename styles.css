@@ -74,6 +74,8 @@ body {
   height: 400px;
   background: white;
   border-radius: 15px;
+  border-color: black;
+  border-width: 10px;
   overflow: hidden;
   text-align: center;
   cursor: pointer;
