@@ -237,3 +237,31 @@ document.addEventListener('DOMContentLoaded', function() {
   
 //   contentHeaders.forEach(header => headerObserver.observe(header));
 // });
+// Add spin on mouse enter and reverse spin on mouse leave for skills images
+
+
+
+
+
+
+
+
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//   const skillImages = document.querySelectorAll("#skills img");
+//   skillImages.forEach(img => {
+//     img.addEventListener("mouseenter", function() {
+//       img.style.transition = "transform 1s linear";
+//       img.style.transform = "rotate(360deg)";
+//     });
+//     img.addEventListener("mouseleave", function() {
+//       img.style.transition = "transform 1s linear";
+//       img.style.transform = "rotate(-360deg)";
+//       // Reset the rotation to 0 after the reverse animation
+//       setTimeout(() => {
+//         img.style.transform = "rotate(0deg)";
+//       }, 1000);
+//     });
+//   });
+// });

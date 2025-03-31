@@ -120,6 +120,7 @@ h1 {
 }
 h2{
     font-size: 2.5em; 
+    padding-bottom: 10px; 
 }
 .modified-h2 {
   color: red;
@@ -152,6 +153,7 @@ h2{
   left: 20%;
   /*margin-top: 10vh;*/
   padding-bottom: 2vh;
+  padding-right: 20px;
 }
 .content-header {
   display: block;
@@ -267,3 +269,24 @@ td {
 .extra-table-row{
     height: 40px; 
 }
+#skills img{
+    height: 60px; 
+}
+
+#skills img:hover {
+    transform: rotate(360deg);
+  }
+
+/* #skills img {
+    transition: transform 0.5s ease;
+    height: 60px;
+  }
+  
+  #skills img:hover {
+    animation: spin 1s linear 1 forwards;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  } */
