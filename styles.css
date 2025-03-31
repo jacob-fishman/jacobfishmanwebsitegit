@@ -118,9 +118,9 @@ h1 {
   font-size: 6em;
   text-align: center;
 }
-h2{
-    font-size: 2.5em; 
-    padding-bottom: 10px; 
+h2 {
+  font-size: 2.5em;
+  padding-bottom: 10px;
 }
 .modified-h2 {
   color: red;
@@ -148,7 +148,7 @@ h2{
   z-index: 5;
   align-items: center;
   width: 60%;
-  background-color: rgba(0, 0, 0, .7);
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 30px;
   left: 20%;
   /*margin-top: 10vh;*/
@@ -233,7 +233,7 @@ h2{
     width: 80%;
   }
 
-  #typed-header{
+  #typed-header {
     font-size: 3em;
     min-height: 150px;
   }
@@ -266,27 +266,34 @@ td {
   z-index: -1;
 }
 
-.extra-table-row{
-    height: 40px; 
+.extra-table-row {
+  height: 40px;
 }
-#skills img{
-    height: 60px; 
+#skills img {
+  height: 60px;
+}
+
+#skills img {
+  width: auto;
+  height: 60px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
 }
 
 #skills img:hover {
-    transform: rotate(360deg);
-  }
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: rotate(360deg);
+}
 
-/* #skills img {
-    transition: transform 0.5s ease;
-    height: 60px;
+@media screen and (max-width: 600px) {
+  .skills-card {
+    width: 100%;
   }
-  
-  #skills img:hover {
-    animation: spin 1s linear 1 forwards;
+  .skill-item {
+    width: 45%;
   }
-  
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  } */
+  .page-title {
+    font-size: 2rem;
+  }
+}
