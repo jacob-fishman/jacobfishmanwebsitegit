@@ -222,8 +222,8 @@ h2 {
   }
   /* Adjust the header image (e.g., your headshot) */
   .header-image {
-    width: 80%;
-    height: auto;
+    width: 20%;
+    height: 20%;
     margin-top: 5vh;
   }
 
