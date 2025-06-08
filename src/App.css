@@ -53,6 +53,16 @@ body.light-theme {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* Hide theme toggle when game modal is open */
+.game-modal ~ .theme-toggle {
+  display: none !important;
+}
+
+/* Alternative approach - hide theme toggle when any game modal exists */
+body:has(.game-modal) .theme-toggle {
+  display: none !important;
+}
+
 /* Contact Form Styles */
 .contact-form {
   max-width: 600px;
@@ -228,6 +238,7 @@ body.light-theme {
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .game-container {
@@ -313,6 +324,22 @@ body.light-theme {
   .arcade-games {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 1fr);
+    gap: 15px;
+    padding: 15px;
+  }
+  
+  .game-card {
+    width: 280px;
+    height: 220px;
+    max-width: 90vw;
+  }
+  
+  .game-card h3 {
+    font-size: 1.2em;
+  }
+  
+  .game-card p {
+    font-size: 0.85em;
   }
   
   .game-container {
@@ -322,7 +349,71 @@ body.light-theme {
   }
   
   .game-board {
-    transform: scale(0.8);
+    transform: scale(0.75);
+    transform-origin: center;
+  }
+  
+  .mobile-controls {
+    margin-top: 15px !important;
+  }
+  
+  .mobile-controls button {
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .arcade-games {
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .game-card {
+    width: 260px;
+    height: 200px;
+    max-width: 85vw;
+    padding: 12px;
+  }
+  
+  .game-card h3 {
+    font-size: 1.1em;
+    margin: 8px 0;
+  }
+  
+  .game-card p {
+    font-size: 0.8em;
+    margin-bottom: 12px;
+  }
+  
+  .game-container {
+    max-width: 98vw;
+    max-height: 98vh;
+    padding: 10px;
+  }
+  
+  .game-board {
+    transform: scale(0.6);
+    transform-origin: center;
+  }
+  
+  .game-header h3 {
+    font-size: 1.2em;
+  }
+  
+  .mobile-controls {
+    margin-top: 10px !important;
+    gap: 8px !important;
+  }
+  
+  .mobile-controls button {
+    padding: 10px 14px !important;
+    font-size: 12px !important;
+  }
+  
+  .controls {
+    font-size: 12px !important;
+    margin-top: 15px !important;
   }
 }
 
@@ -390,6 +481,47 @@ body.light-theme {
   .container {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 15px;
+    padding: 0 15px;
+  }
+  
+  .card {
+    width: 280px;
+    height: 320px;
+    max-width: 90vw;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    gap: 10px;
+    padding: 0 10px;
+  }
+  
+  .card {
+    width: 260px;
+    height: 300px;
+    max-width: 85vw;
+  }
+  
+  .card-content {
+    padding: 15px;
+  }
+  
+  .card-content h2 {
+    font-size: 1.8em;
+    padding-top: 20px;
   }
 }
 
@@ -617,20 +749,29 @@ h2 {
     display: block;
     width: 100%;
     max-width: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 2vh 10px;
+    min-height: 500px;
   }
   #resume-embed {
     width: 100%;
-    height: 500px;
+    height: 60vh;
+    min-height: 400px;
   }
   #resume-warning {
     display: none;
   }
 
   .main-content {
-    width: 80%;
+    width: 90%;
+    margin: 1em auto;
+    padding: 15px;
   }
+  
+  .content-header {
+    margin-top: 5vh;
+    padding-top: 1vh;
+  }
+  
   /* Adjust the header image (e.g., your headshot) */
   .header-image {
     width: 80%;
@@ -647,6 +788,31 @@ h2 {
   #typed-header {
     font-size: 3em;
     min-height: 150px;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-content {
+    width: 95%;
+    padding: 10px;
+  }
+  
+  #resume-holder {
+    padding: 1vh 5px;
+    min-height: 400px;
+  }
+  
+  #resume-embed {
+    height: 50vh;
+    min-height: 350px;
+  }
+  
+  .content-header {
+    font-size: 2em;
+  }
+  
+  .content-subheader {
+    font-size: 1.1em;
   }
 }
 

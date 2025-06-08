@@ -124,6 +124,27 @@ const PacManGame = ({ onClose }) => {
     });
   }, [direction, gameStarted, gameOver]);
 
+  const handleMobileControl = (newDirection) => {
+    if (!gameStarted || gameOver) return;
+    
+    switch (newDirection) {
+      case 'up':
+        setDirection({ x: 0, y: -1 });
+        break;
+      case 'down':
+        setDirection({ x: 0, y: 1 });
+        break;
+      case 'left':
+        setDirection({ x: -1, y: 0 });
+        break;
+      case 'right':
+        setDirection({ x: 1, y: 0 });
+        break;
+      default:
+        break;
+    }
+  };
+
   const resetGame = () => {
     setPacman(INITIAL_PACMAN);
     setGhosts(INITIAL_GHOSTS);
@@ -342,8 +363,84 @@ const PacManGame = ({ onClose }) => {
         })}
       </div>
       
+      {/* Mobile Touch Controls */}
+      <div className="mobile-controls" style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        marginTop: '20px',
+        gap: '10px'
+      }}>
+        <motion.button
+          onClick={() => handleMobileControl('up')}
+          whileTap={{ scale: 0.9 }}
+          style={{
+            padding: '15px 20px',
+            backgroundColor: '#FFEB3B',
+            color: 'black',
+            border: 'none',
+            borderRadius: '8px',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            cursor: 'pointer'
+          }}
+        >
+          ↑
+        </motion.button>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <motion.button
+            onClick={() => handleMobileControl('left')}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              padding: '15px 20px',
+              backgroundColor: '#FFEB3B',
+              color: 'black',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+          >
+            ←
+          </motion.button>
+          <motion.button
+            onClick={() => handleMobileControl('right')}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              padding: '15px 20px',
+              backgroundColor: '#FFEB3B',
+              color: 'black',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+          >
+            →
+          </motion.button>
+        </div>
+        <motion.button
+          onClick={() => handleMobileControl('down')}
+          whileTap={{ scale: 0.9 }}
+          style={{
+            padding: '15px 20px',
+            backgroundColor: '#FFEB3B',
+            color: 'black',
+            border: 'none',
+            borderRadius: '8px',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            cursor: 'pointer'
+          }}
+        >
+          ↓
+        </motion.button>
+      </div>
+      
       <div className="controls" style={{ color: colors.textSecondary }}>
-        <p>Use arrow keys to move Pac-Man</p>
+        <p>Use arrow keys or touch controls to move Pac-Man</p>
         <p>Eat all dots while avoiding ghosts!</p>
       </div>
     </div>

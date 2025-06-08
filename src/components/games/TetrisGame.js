@@ -119,6 +119,27 @@ const TetrisGame = ({ onClose }) => {
     }
   };
 
+  const handleMobileControl = (action) => {
+    if (!gameStarted || gameOver) return;
+    
+    switch (action) {
+      case 'left':
+        movePiece(-1, 0);
+        break;
+      case 'right':
+        movePiece(1, 0);
+        break;
+      case 'down':
+        movePiece(0, 1);
+        break;
+      case 'rotate':
+        rotatePieceHandler();
+        break;
+      default:
+        break;
+    }
+  };
+
   const resetGame = () => {
     setBoard(Array(BOARD_HEIGHT).fill().map(() => Array(BOARD_WIDTH).fill(0)));
     setCurrentPiece(getRandomPiece());
@@ -253,7 +274,86 @@ const TetrisGame = ({ onClose }) => {
         )}
       </div>
       
+      {/* Mobile Touch Controls */}
+      <div className="mobile-controls" style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        marginTop: '20px',
+        gap: '10px'
+      }}>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <motion.button
+            onClick={() => handleMobileControl('rotate')}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              padding: '15px 20px',
+              backgroundColor: '#2196F3',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+          >
+            ↻
+          </motion.button>
+          <motion.button
+            onClick={() => handleMobileControl('down')}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              padding: '15px 20px',
+              backgroundColor: '#2196F3',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+          >
+            ↓
+          </motion.button>
+        </div>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <motion.button
+            onClick={() => handleMobileControl('left')}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              padding: '15px 20px',
+              backgroundColor: '#2196F3',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+          >
+            ←
+          </motion.button>
+          <motion.button
+            onClick={() => handleMobileControl('right')}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              padding: '15px 20px',
+              backgroundColor: '#2196F3',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+          >
+            →
+          </motion.button>
+        </div>
+      </div>
+      
       <div className="controls" style={{ color: colors.textSecondary }}>
+        <p>Use arrow keys or touch controls</p>
         <p>← → Move | ↓ Drop | ↑ Rotate</p>
         <p>Clear lines to score points!</p>
       </div>

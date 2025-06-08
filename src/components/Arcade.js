@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
 import { FaGamepad, FaTimes, FaAppleAlt, FaCube, FaGhost, FaBomb } from 'react-icons/fa';
@@ -11,11 +11,31 @@ const Arcade = () => {
   const { colors } = useTheme();
   const [selectedGame, setSelectedGame] = useState(null);
 
+  // Hide/show theme toggle when game modal opens/closes
+  useEffect(() => {
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (themeToggle) {
+      if (selectedGame) {
+        themeToggle.style.display = 'none';
+      } else {
+        themeToggle.style.display = 'flex';
+      }
+    }
+
+    // Cleanup function to ensure theme toggle is visible when component unmounts
+    return () => {
+      const themeToggle = document.querySelector('.theme-toggle');
+      if (themeToggle) {
+        themeToggle.style.display = 'flex';
+      }
+    };
+  }, [selectedGame]);
+
   const games = [
     {
       id: 'snake',
       name: 'Snake',
-      description: 'Classic snake game - eat food and grow!',
+      description: 'Eat food and grow!',
       color: '#4CAF50',
       component: SnakeGame,
       icon: FaAppleAlt

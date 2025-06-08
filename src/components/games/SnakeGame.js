@@ -69,6 +69,27 @@ const SnakeGame = ({ onClose }) => {
     });
   }, [direction, food, gameOver, gameStarted, generateFood]);
 
+  const handleDirectionChange = (newDirection) => {
+    if (!gameStarted) return;
+    
+    switch (newDirection) {
+      case 'up':
+        if (direction.y === 0) setDirection({ x: 0, y: -1 });
+        break;
+      case 'down':
+        if (direction.y === 0) setDirection({ x: 0, y: 1 });
+        break;
+      case 'left':
+        if (direction.x === 0) setDirection({ x: -1, y: 0 });
+        break;
+      case 'right':
+        if (direction.x === 0) setDirection({ x: 1, y: 0 });
+        break;
+      default:
+        break;
+    }
+  };
+
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (!gameStarted) return;
@@ -80,16 +101,16 @@ const SnakeGame = ({ onClose }) => {
       
       switch (e.key) {
         case 'ArrowUp':
-          if (direction.y === 0) setDirection({ x: 0, y: -1 });
+          handleDirectionChange('up');
           break;
         case 'ArrowDown':
-          if (direction.y === 0) setDirection({ x: 0, y: 1 });
+          handleDirectionChange('down');
           break;
         case 'ArrowLeft':
-          if (direction.x === 0) setDirection({ x: -1, y: 0 });
+          handleDirectionChange('left');
           break;
         case 'ArrowRight':
-          if (direction.x === 0) setDirection({ x: 1, y: 0 });
+          handleDirectionChange('right');
           break;
         default:
           break;
@@ -177,8 +198,86 @@ const SnakeGame = ({ onClose }) => {
         })}
       </div>
       
+      {/* Mobile Touch Controls - Only show when game is started */}
+      {gameStarted && !gameOver && (
+        <div className="mobile-controls" style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          marginTop: '20px',
+          gap: '10px'
+        }}>
+          <motion.button
+            onClick={() => handleDirectionChange('up')}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              padding: '15px 20px',
+              backgroundColor: '#4CAF50',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+          >
+            ↑
+          </motion.button>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <motion.button
+              onClick={() => handleDirectionChange('left')}
+              whileTap={{ scale: 0.9 }}
+              style={{
+                padding: '15px 20px',
+                backgroundColor: '#4CAF50',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+            >
+              ←
+            </motion.button>
+            <motion.button
+              onClick={() => handleDirectionChange('right')}
+              whileTap={{ scale: 0.9 }}
+              style={{
+                padding: '15px 20px',
+                backgroundColor: '#4CAF50',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+            >
+              →
+            </motion.button>
+          </div>
+          <motion.button
+            onClick={() => handleDirectionChange('down')}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              padding: '15px 20px',
+              backgroundColor: '#4CAF50',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+          >
+            ↓
+          </motion.button>
+        </div>
+      )}
+      
       <div className="controls" style={{ color: colors.textSecondary }}>
-        <p>Use arrow keys to control the snake</p>
+        <p>Use arrow keys or touch controls to move the snake</p>
         <p>Eat the red food to grow and score points!</p>
       </div>
     </div>

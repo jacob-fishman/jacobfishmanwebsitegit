@@ -11,6 +11,7 @@ const MinesweeperGame = ({ onClose }) => {
   const [gameState, setGameState] = useState('waiting'); // waiting, playing, won, lost
   const [mineLocations, setMineLocations] = useState([]);
   const [flagCount, setFlagCount] = useState(MINE_COUNT);
+  const [mobileMode, setMobileMode] = useState('reveal'); // 'reveal' or 'flag'
 
   const initializeBoard = useCallback(() => {
     const newBoard = Array(GRID_SIZE).fill().map(() => 
@@ -129,6 +130,14 @@ const MinesweeperGame = ({ onClose }) => {
     setBoard(newBoard);
   };
 
+  const handleCellClick = (x, y) => {
+    if (mobileMode === 'reveal') {
+      revealCell(x, y);
+    } else {
+      toggleFlag({ preventDefault: () => {} }, x, y);
+    }
+  };
+
   const resetGame = () => {
     setGameState('waiting');
     setBoard([]);
@@ -221,7 +230,7 @@ const MinesweeperGame = ({ onClose }) => {
               <motion.button
                 key={`${x}-${y}`}
                 className="mine-cell"
-                onClick={() => revealCell(x, y)}
+                onClick={() => handleCellClick(x, y)}
                 onContextMenu={(e) => toggleFlag(e, x, y)}
                 whileHover={{ scale: cell.isRevealed ? 1 : 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -247,8 +256,52 @@ const MinesweeperGame = ({ onClose }) => {
         </div>
       )}
 
+      {/* Mobile Touch Controls */}
+      {gameState === 'playing' && (
+        <div className="mobile-controls" style={{ 
+          display: 'flex', 
+          justifyContent: 'center',
+          alignItems: 'center', 
+          marginTop: '20px',
+          gap: '15px'
+        }}>
+          <motion.button
+            onClick={() => setMobileMode('reveal')}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              padding: '12px 20px',
+              backgroundColor: mobileMode === 'reveal' ? '#FF6B35' : '#ccc',
+              color: mobileMode === 'reveal' ? 'white' : 'black',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+          >
+            🔍 Reveal
+          </motion.button>
+          <motion.button
+            onClick={() => setMobileMode('flag')}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              padding: '12px 20px',
+              backgroundColor: mobileMode === 'flag' ? '#FF6B35' : '#ccc',
+              color: mobileMode === 'flag' ? 'white' : 'black',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+          >
+            🚩 Flag
+          </motion.button>
+        </div>
+      )}
+      
       <div className="controls" style={{ color: colors.textSecondary }}>
-        <p>Left click to reveal • Right click to flag</p>
+        <p>Use touch controls or left click to reveal • Right click to flag</p>
         <p>Find all mines without clicking on them!</p>
       </div>
     </div>
