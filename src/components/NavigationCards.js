@@ -50,36 +50,23 @@ const NavigationCards = () => {
             key={card.id}
             className="card"
             variants={cardVariants}
-            whileHover={{ 
-              y: -15, 
-              scale: 1.05,
-              boxShadow: `0 20px 40px ${colors.shadow}`,
-              transition: { duration: 0.3 }
-            }}
-            whileTap={{ scale: 0.95 }}
             onClick={() => smoothScroll(card.id)}
             transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ scale: 1.1 }}
             style={{
               backgroundColor: colors.cardBackground,
-              border: `2px solid ${colors.cardBorder}`,
-              boxShadow: `0 8px 25px ${colors.shadow}`
+              border: `2px solid ${colors.cardBorder}`
             }}
           >
-            <motion.img 
+            <img 
               src={card.image} 
               alt={card.alt}
               id={card.imageId}
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.3 }}
             />
             <div className="card-content">
-              <motion.h2
-                style={{ color: colors.cardText }}
-                whileHover={{ scale: 1.1, color: colors.accent }}
-                transition={{ duration: 0.2 }}
-              >
+              <h2 style={{ color: colors.cardText }}>
                 {card.title}
-              </motion.h2>
+              </h2>
             </div>
           </motion.div>
         ))}

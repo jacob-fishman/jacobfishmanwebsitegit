@@ -41,11 +41,6 @@ const Header = () => {
             border: colors.logoBackground === 'transparent' ? 'none' : `1px solid ${colors.cardBorder}`,
             boxShadow: colors.logoBackground === 'transparent' ? 'none' : `0 8px 32px ${colors.shadow}`
           }}
-          whileHover={{
-            boxShadow: `0 12px 40px ${colors.shadow}`,
-            y: -2
-          }}
-          transition={{ duration: 0.3 }}
         >
           <h1 id="typed-header" style={{ color: colors.contentText }}>
             {displayText}
@@ -64,7 +59,6 @@ const Header = () => {
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        whileHover={{ scale: 1.05 }}
       >
         <motion.div
           style={{
@@ -75,11 +69,6 @@ const Header = () => {
             border: colors.logoBackground === 'transparent' ? 'none' : `1px solid ${colors.cardBorder}`,
             boxShadow: colors.logoBackground === 'transparent' ? 'none' : `0 8px 32px ${colors.shadow}`
           }}
-          whileHover={{
-            boxShadow: `0 12px 40px ${colors.shadow}`,
-            y: -2
-          }}
-          transition={{ duration: 0.3 }}
         >
           <img 
             src="/deptcswhitetext.png" 
@@ -98,17 +87,11 @@ const Header = () => {
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
-        whileHover={{ scale: 1.1 }}
       >
         <motion.img 
           className="header-image" 
           src="/cropped-headshot-2.jpg" 
           alt="Jacob Fishman"
-          whileHover={{ 
-            scale: 1.05,
-            boxShadow: "0 10px 30px rgba(255, 255, 255, 0.3)"
-          }}
-          transition={{ duration: 0.3 }}
         />
       </motion.div>
     </motion.div>
